@@ -65,10 +65,12 @@ class FileEditor
 	 * @param $filePath
 	 * @param $stubPath
 	 *
+	 * @param bool $verifyPathsExists
+	 * @param bool $stripOpenTag
 	 * @return bool|int
 	 * @throws FileNotFoundException
 	 */
-	public static function appendStub($filePath, $stubPath, $verifyPathsExists = true)
+	public static function appendStub($filePath, $stubPath, $verifyPathsExists = true, $stripOpenTag = true)
 	{
 		if ($verifyPathsExists) {
 			if (!file_exists($filePath)) {
@@ -82,7 +84,14 @@ class FileEditor
 		// get contents and update the file
 		$contents = file_get_contents($stubPath);
 
-		$contents = "\r\n" . $contents;
+		// strip open PHP tags
+		if ($stripOpenTag) {
+			$tagRegex = '/^\s?<\?(?:php|=)/';
+			$contents = preg_replace($tagRegex, '', $contents);
+		}
+
+		// add a new line
+		$contents = "\r\n" . trim($contents);
 
 		return file_put_contents($filePath, $contents, FILE_APPEND);
 	}
@@ -137,19 +146,48 @@ class FileEditor
 	 * @param $filePath
 	 *
 	 * @param bool $trim
+	 * @param bool $skipOpenTag
 	 * @return bool|string
 	 */
-	public static function readFirstLine($filePath, $trim = true)
+	public static function readFirstLine($filePath, $trim = true, $skipOpenTag = true)
 	{
-		$f = fopen($filePath, 'rb');
-		$line = fgets($f);
-		fclose($f);
+		$handle = fopen($filePath, 'rb');
 
-		if ($trim) {
-			return trim($line);
+		$startingLine = null;
+		$startingTagFound = false;
+
+		while (!feof($handle)) {
+			$line = fgets($handle);
+
+			// trim the line
+			if ($trim) {
+				$line = trim($line);
+			}
+
+			if (!$startingTagFound) {
+				// strip starting PHP tags
+				if ($skipOpenTag) {
+					$tagRegex = '/^\s?<\?(?:php|=)/';
+					if (preg_match($tagRegex, $line)) {
+						$startingTagFound = true;
+						$line = preg_replace($tagRegex, '', $line);
+					}
+				}
+			}
+
+			if (strlen($line) > 0) {
+				$startingLine = $line;
+				break;
+			}
 		}
 
-		return $line;
+		fclose($handle);
+
+//		if ($trim) {
+//			return trim($line);
+//		}
+
+		return $startingLine;
 	}
 
 
