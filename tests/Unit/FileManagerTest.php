@@ -6,7 +6,6 @@ use ElegantMedia\PHPToolkit\FileEditor;
 
 class FileManagerTest extends \PHPUnit\Framework\TestCase
 {
-
 	private static $file = '_file_manager_test.txt';
 	private static $fileContent = 'foo';
 
