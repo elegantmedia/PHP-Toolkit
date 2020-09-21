@@ -25,6 +25,6 @@ class Reflector
 			$path .= DIRECTORY_SEPARATOR.ltrim($pathSuffix, DIRECTORY_SEPARATOR);
 		}
 
-		return Path::canonicalPath($path);
+		return Path::canonical($path);
 	}
 }
