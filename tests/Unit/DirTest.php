@@ -37,7 +37,6 @@ class DirTest extends TestCase
 	 */
 	public function testDirMakeDirectoryIfNotExistsCreatesNewDir()
 	{
-
 		if (is_dir(static::$testDirName)) {
 			rmdir(static::$testDirName);
 		}

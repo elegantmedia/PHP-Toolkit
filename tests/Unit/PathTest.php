@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 class PathTest extends TestCase
 {
-
 	public function testPathwithEndingSlash()
 	{
 		$this->assertEquals('/my-test-path/', Path::withEndingSlash('/my-test-path'));

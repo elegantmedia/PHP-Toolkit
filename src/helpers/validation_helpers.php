@@ -37,5 +37,4 @@ if (!function_exists('validate_all_present')) {
 			throw new InvalidArgumentException($errorMessage);
 		}
 	}
-
 }
