@@ -3,9 +3,6 @@ version: 7
 preset: psr2
 tab-width: 4
 use-tabs: true
-disabled:
-    - no_blank_lines_after_class_opening
-    - no_trailing_whitespace_in_comment
 finder:
     exclude:
         - "modules"
