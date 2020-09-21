@@ -9,7 +9,7 @@ class DirTest extends TestCase
 {
 	private static $testDirName = "_test_dir";
 
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		if (is_dir(static::$testDirName)) {
 			rmdir(static::$testDirName);
@@ -66,7 +66,13 @@ class DirTest extends TestCase
 		file_put_contents($file, "foo");
 		$this->assertFileExists($file);
 		Dir::deleteDirectory($file);
-		$this->assertFileNotExists($file);
+
+		if (method_exists($this, 'assertFileDoesNotExist')) {
+			$this->assertFileDoesNotExist($file);
+		} else {
+			// support PHP 7.2 deprecated function
+			$this->assertFileNotExists($file);
+		}
 	}
 
 	public function testDirDeleteDirectoryDeletesDirectory()
@@ -78,6 +84,12 @@ class DirTest extends TestCase
 		file_put_contents("{$dir}/child/test.txt", "foo");
 		$this->assertFileExists($dir);
 		Dir::deleteDirectory($dir);
-		$this->assertFileNotExists($dir);
+
+		if (method_exists($this, 'assertFileDoesNotExist')) {
+			$this->assertFileDoesNotExist($dir);
+		} else {
+			// support PHP 7.2 deprecated function
+			$this->assertFileNotExists($dir);
+		}
 	}
 }

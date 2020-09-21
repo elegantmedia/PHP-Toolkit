@@ -13,7 +13,7 @@ class FileEditorTest extends TestCase
 	private static $stub = '_stub.txt';
 	private static $stubContent = 'bar';
 
-	protected function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -21,7 +21,7 @@ class FileEditorTest extends TestCase
 		file_put_contents(static::$stub, static::$stubContent);
 	}
 
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		unlink(static::$file);
 		unlink(static::$stub);

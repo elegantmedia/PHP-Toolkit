@@ -1,5 +1,9 @@
 ## PHP Toolkit - Utility and Helper Library for Business Applications
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Quality Score][ico-code-quality]][link-code-quality]
+
 This library holds commonly used helper functions used in many business applications. All features used PHP's native APIs and there are no third party dependencies.
 
 ### Installation
@@ -179,19 +183,8 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 Copyright (c) 2020 Elegant Media.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[ico-version]: https://img.shields.io/packagist/v/elegantmedia/php-toolkit.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/elegantmedia/php-toolkit.svg?style=flat-square
+[link-packagist]: https://packagist.org/packages/elegantmedia/php-toolkit
+[link-code-quality]: https://scrutinizer-ci.com/g/elegantmedia/php-toolkit
