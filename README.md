@@ -3,6 +3,8 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Quality Score][ico-code-quality]][link-code-quality]
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 
 This library holds commonly used helper functions used in many business applications. All features used PHP's native APIs and there are no third party dependencies.
 
@@ -186,5 +188,9 @@ Copyright (c) 2020 Elegant Media.
 [ico-version]: https://img.shields.io/packagist/v/elegantmedia/php-toolkit.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/elegantmedia/php-toolkit.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/elegantmedia/php-toolkit/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/elegantmedia/php-toolkit.svg?style=flat-square
 [link-packagist]: https://packagist.org/packages/elegantmedia/php-toolkit
 [link-code-quality]: https://scrutinizer-ci.com/g/elegantmedia/php-toolkit
+[link-travis]: https://travis-ci.org/elegantmedia/php-toolkit
+[link-scrutinizer]: https://scrutinizer-ci.com/g/elegantmedia/php-toolkit/code-structure

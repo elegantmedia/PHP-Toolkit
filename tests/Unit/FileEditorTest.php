@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class FileEditorTest extends TestCase
 {
-
 	private static $file = '_file.txt';
 	private static $fileContent = 'foo';
 	private static $stub = '_stub.txt';
