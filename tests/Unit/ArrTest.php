@@ -152,7 +152,13 @@ class ArrTest extends \PHPUnit\Framework\TestCase
 
 		self::assertFalse($result);
 	}
-	
+
+
+	public function testArrIsAssocDetectsArrayNonArrays()
+	{
+		self::assertFalse(Arr::isAssoc('test'));
+	}
+
 	/**
 	 * @test
 	 */
@@ -254,5 +260,72 @@ class ArrTest extends \PHPUnit\Framework\TestCase
 			'one,two,three',
 			Arr::implodeIgnoreEmpty(',', ['one', '', 'two', '', 'three'])
 		);
+	}
+
+	public function testArraySwapKey()
+	{
+		$oldKey = "old_key";
+		$valueKey = "name";
+		$value = 'the_value';
+		$newKey = "new_key";
+
+		$arr = [
+			[
+				$oldKey => [
+					[
+						$oldKey => [
+							[
+								$valueKey => $value
+							]
+						],
+					]
+				],
+			]
+		];
+
+		$newArr = Arr::swapKey($arr, $oldKey, $newKey);
+		$this->assertEquals($value, $newArr[0][$newKey][0][$oldKey][0][$valueKey]);
+	}
+
+	public function testArraySwapKeyRecursive()
+	{
+		$oldKey = "old_key";
+		$valueKey = "name";
+		$value = 'the_value';
+		$newKey = "new_key";
+
+		$arr = [
+			[
+				$oldKey => [
+					[
+						$oldKey => [
+							[
+								$valueKey => $value
+							]
+						],
+					]
+				],
+			]
+		];
+
+		$newArr = Arr::swapKey($arr, $oldKey, $newKey, true);
+		$this->assertEquals($value, $newArr[0][$newKey][0][$newKey][0][$valueKey]);
+	}
+
+	public function testKeyByConvertsArray()
+	{
+		$arr = [
+			['name' => 'john', 'age' => 45],
+			['name' => 'jane', 'age' => 32],
+		];
+
+		$key = 'name';
+
+		$result = Arr::keyBy($arr, $key);
+
+		foreach ($arr as $index => $original) {
+			$newKey = $arr[$index][$key];
+			$this->assertEquals($result[$newKey][0]["age"], $arr[$index]["age"]);
+		}
 	}
 }

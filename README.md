@@ -27,10 +27,16 @@ use \ElegantMedia\PHPToolkit\Arr;
 Arr::isAssoc($array);
 
 // get matching subset of array. Similar to `array_intersect`, but does recursively.
-Arr::intersectRecursiveintersectRecursiveintersectRecursive($source, $subset);
+Arr::intersectRecursive($source, $subset);
 
 // Implode, but exclude empty values
-Arr::implodeIgnoreEmpty($array);
+Arr::implodeIgnoreEmpty($glue, $array);
+
+// Sway a key on an associative array
+Arr::swapKey($array, $oldKey, $newKey, $recursive = false);
+
+// Key values of an array to another key
+Arr::keyBy($array, $key);
 ```
 
 #### Conversions

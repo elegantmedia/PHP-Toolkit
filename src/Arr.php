@@ -10,16 +10,16 @@ class Arr
 	 *
 	 * Is the array an associative array?
 	 *
-	 * @param array $arr
+	 * @param $input
 	 *
 	 * @return bool
 	 */
-	public static function isAssoc(array $arr): bool
+	public static function isAssoc($input): bool
 	{
-		if (array() === $arr) {
+		if (!is_array($input)) {
 			return false;
 		}
-		return array_keys($arr) !== range(0, count($arr) - 1);
+		return array_keys($input) !== range(0, count($input) - 1);
 	}
 
 
@@ -98,5 +98,74 @@ class Arr
 		$pieces = array_filter($pieces);
 
 		return implode($glue, $pieces);
+	}
+
+	/**
+	 *
+	 * Replace an existing key of an array with a new one, recursively if required.
+	 *
+	 * @param array $array
+	 * @param $existingKey
+	 * @param $newKey
+	 * @param false $recursive
+	 * @return array
+	 */
+	public static function swapKey(array $array, $existingKey, $newKey, $recursive = false): array
+	{
+		$allArrayData = [];
+		foreach ($array as $item) {
+			$arrayData = $item;
+			if (array_key_exists($existingKey, $arrayData)) {
+				$arrayData[$newKey] = $arrayData[$existingKey];
+				unset($arrayData[$existingKey]);
+			}
+
+			// do this recursively
+			if ($recursive) {
+				if (isset($arrayData[$newKey]) && count($arrayData[$newKey])) {
+					$arrayData[$newKey] = self::swapKey($arrayData[$newKey], $existingKey, $newKey, true);
+				}
+			}
+
+			$allArrayData[] = $arrayData;
+		}
+		return $allArrayData;
+	}
+
+	/**
+	 *
+	 * Get an array and key it by a given key
+	 * @example
+	 * [
+	 *        [ 'name' => 'john', 'age' => 45 ],
+	 *        [ 'name' => 'jane', 'age', => 32 ],
+	 * ]
+	 * $people = Arr::keyBy($rows, 'name');
+	 *
+	 * becomes
+	 * [
+	 *        'john' => [ 'age' => 45 ],
+	 *        'jane' => [ 'age' => 32 ],
+	 * ]
+	 *
+	 *
+	 * @param $array
+	 * @param $keyBy
+	 *
+	 * @return array
+	 */
+	public static function keyBy($array, $keyBy): array
+	{
+		$newValues = [];
+
+		foreach ($array as $key => $value) {
+			if (is_array($value)) {
+				if (isset($value[$keyBy]) && $value[$keyBy] !== '') {
+					$newValues[$value[$keyBy]][] = $value;
+				}
+			}
+		}
+
+		return $newValues;
 	}
 }
