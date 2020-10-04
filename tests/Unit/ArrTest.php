@@ -287,6 +287,29 @@ class ArrTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($value, $newArr[0][$newKey][0][$oldKey][0][$valueKey]);
 	}
 
+	public function testSwapKeysFnAppliesFunction()
+	{
+		$array = [
+			'my-life' => 1,
+			'my new' => 2,
+			'myCar' => 3,
+		];
+
+		self::assertFalse(array_key_exists('MY-LIFE', $array));
+
+		Arr::swapKeysFn($array, 'strtoupper');
+
+		self::assertTrue(array_key_exists('MY-LIFE', $array));
+	}
+
+	public function testSwapKeysFnNonArraysAreIgnored()
+	{
+		$str = 'string';
+		Arr::swapKeysFn($str, 'strtoupper');
+
+		self::assertEquals($str, 'string');
+	}
+
 	public function testArraySwapKeyRecursive()
 	{
 		$oldKey = "old_key";
