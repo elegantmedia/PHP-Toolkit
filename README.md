@@ -89,6 +89,12 @@ FileEditor::appendStub($filePath, $stubPath, $verifyPathsExists = true)
 // Check if a string is in file
 FileEditor::isTextInFile($filePath, $string, $caseSensitive = true)
 
+// Find and replace text in a file
+$bytes = FileEditor::findAndReplace($filePath, $search, $replace)
+
+// Find and replace text in a file by regex
+$text = FileEditor::findAndReplaceRegEx($filePath, $searchRegEx, $replaceRegEx)
+
 // Check if two files are similar (by size and hash)
 FileEditor::areFilesSimilar($path1, $path2)
 

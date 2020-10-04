@@ -10,14 +10,20 @@ class Reflector
 	 *
 	 * Get the inherited class' directory path
 	 *
-	 * @param $self
+	 * @param object|string $self
 	 * @param null $pathSuffix
 	 * @return string
 	 * @throws \ReflectionException
 	 */
 	public static function classPath($self, $pathSuffix = null): string
 	{
-		$reflector = new \ReflectionClass(get_class($self));
+		$class = $self;
+
+		if (is_object($self)) {
+			$class = get_class($self);
+		}
+
+		$reflector = new \ReflectionClass($class);
 
 		$path = dirname($reflector->getFileName());
 

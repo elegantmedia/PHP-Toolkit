@@ -122,6 +122,80 @@ class FileEditor
 
 	/**
 	 *
+	 * Find and replace text in a file
+	 *
+	 * @param $filePath
+	 * @param string|string[] $search <p>
+	 * The value being searched for, otherwise known as the needle.
+	 * An array may be used to designate multiple needles.
+	 * </p>
+	 * @param string|string[] $replace <p>
+	 * The replacement value that replaces found search
+	 * values. An array may be used to designate multiple replacements.
+	 * </p>
+	 * @param null|int $count [optional] If passed, this will hold the number of matched and replaced needles.
+	 * @return int|false The function returns the number of bytes that were written to the file, or
+	 * false on failure.
+	 * @throws FileNotFoundException
+	 */
+	public static function findAndReplace($filePath, $search, $replace, &$count = null)
+	{
+		if (!file_exists($filePath)) {
+			throw new FileNotFoundException("File $filePath not found");
+		}
+
+		$contents = str_replace($search, $replace, file_get_contents($filePath), $count);
+
+		return file_put_contents($filePath, $contents);
+	}
+
+	/**
+	 *
+	 * Find and replace text in a file
+	 *
+	 * @param $filePath
+	 * @param string|string[] $search <p>
+	 * The value being searched for, otherwise known as the needle.
+	 * An array may be used to designate multiple needles.
+	 * </p>
+	 * @param string|string[] $replace <p>
+	 * The replacement value that replaces found search
+	 * values. An array may be used to designate multiple replacements.
+	 * </p>
+	 * @param int $limit [optional] <p>
+	 * The maximum possible replacements for each pattern in each
+	 * <i>subject</i> string. Defaults to
+	 * -1 (no limit).
+	 * </p>
+	 * @param int $count [optional] <p>
+	 * If specified, this variable will be filled with the number of
+	 * replacements done.
+	 * </p>
+	 * @return string|string[]|null <b>preg_replace</b> returns an array if the
+	 * <i>subject</i> parameter is an array, or a string
+	 * otherwise.
+	 * </p>
+	 * <p>
+	 * If matches are found, the new <i>subject</i> will
+	 * be returned, otherwise <i>subject</i> will be
+	 * returned unchanged or <b>NULL</b> if an error occurred.
+	 * @throws FileNotFoundException
+	 */
+	public static function findAndReplaceRegex($filePath, $search, $replace, $limit = -1, &$count = null)
+	{
+		if (!file_exists($filePath)) {
+			throw new FileNotFoundException("File $filePath not found");
+		}
+
+		$contents = preg_replace($search, $replace, file_get_contents($filePath), $limit, $count);
+
+		file_put_contents($filePath, $contents);
+
+		return $contents;
+	}
+
+	/**
+	 *
 	 * Check if two files are identical in content
 	 *
 	 * @param $path1
@@ -182,10 +256,6 @@ class FileEditor
 		}
 
 		fclose($handle);
-
-//		if ($trim) {
-//			return trim($line);
-//		}
 
 		return $startingLine;
 	}
