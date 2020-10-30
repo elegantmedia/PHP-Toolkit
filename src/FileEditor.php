@@ -287,7 +287,7 @@ class FileEditor
 			}
 
 			$buffer .= fread($fp, 512);
-			$tokens = token_get_all($buffer);
+			$tokens = @token_get_all($buffer);
 
 			if (strpos($buffer, '{') === false) {
 				continue;

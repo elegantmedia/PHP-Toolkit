@@ -124,6 +124,7 @@ Loader::includeAllFilesFromDirRecursive($dirPath);
 use \ElegantMedia\PHPToolkit\Path;
 
 Path::withEndingSlash($path);
+Path::withStartingSlash($path);
 Path::withoutEndingSlash($path);
 Path::withoutStartingSlash($path);
 

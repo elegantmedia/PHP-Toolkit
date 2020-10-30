@@ -18,7 +18,7 @@ class Loader
 
 		foreach (glob($dirPath . "/*.php") as $filename) {
 			if (!in_array($filename, $includedFiles, true)) {
-				include $filename;
+				include_once $filename;
 			}
 		}
 	}
@@ -31,13 +31,16 @@ class Loader
 	 */
 	public static function includeAllFilesFromDirRecursive($dirPath): void
 	{
+		// include files from current dir
+		self::includeAllFilesFromDir($dirPath);
+
 		/** @var \SplFileInfo $filename */
 		$filtered = [];
 		foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dirPath)) as $file) {
 			if (!in_array($file->getPathname(), get_included_files(), true)) {
 				if ($file->getExtension() === 'php') {
 					$filtered[] = $file;
-					include($file->getPathname());
+					include_once $file->getPathname();
 				}
 			}
 		}

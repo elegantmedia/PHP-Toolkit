@@ -53,6 +53,19 @@ class Path
 
 	/**
 	 *
+	 * Add a leading slash to a string (if it doesn't exist)
+	 *
+	 * @param $path
+	 *
+	 * @return string
+	 */
+	public static function withStartingSlash($path): string
+	{
+		return '/' . ltrim($path, '/');
+	}
+
+	/**
+	 *
 	 * Remove dot segments from paths.
 	 *
 	 * @link https://tools.ietf.org/html/rfc3986#section-5.2.4
