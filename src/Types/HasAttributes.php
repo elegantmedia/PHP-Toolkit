@@ -7,7 +7,7 @@ namespace ElegantMedia\PHPToolkit\Types;
 trait HasAttributes
 {
 
-	protected $attributes;
+	protected $attributes = [];
 
 	public function __set($name, $value)
 	{
