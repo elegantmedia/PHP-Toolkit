@@ -48,7 +48,7 @@ class Conversion
 	 */
 	public static function stringToInt($string): int
 	{
-		return (int) round(preg_replace("/[^0-9.]/", "", $string));
+		return (int) round(floatval(preg_replace("/[^0-9.]/", "", $string)));
 	}
 
 	/**

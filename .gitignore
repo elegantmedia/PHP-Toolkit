@@ -4,5 +4,6 @@ vendor
 phpcs.xml
 phpunit.xml
 .idea
+roadmap
 .phpunit.result.cache
 LOCAL.md

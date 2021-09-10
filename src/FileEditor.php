@@ -296,7 +296,9 @@ class FileEditor
 			for ($iMax = count($tokens); $i< $iMax; $i++) {
 				if ($tokens[$i][0] === T_NAMESPACE) {
 					for ($j=$i+1, $jMax = count($tokens); $j< $jMax; $j++) {
-						if ($tokens[$j][0] === T_STRING) {
+						// 'T_NAME_QUALIFIED' is available since PHP 8
+						$tokenName = defined('T_NAME_QUALIFIED') ? 'T_NAME_QUALIFIED' : 'T_STRING';
+						if ($tokens[$j][0] === constant($tokenName)) {
 							$namespace .= '\\'.$tokens[$j][1];
 						} elseif ($tokens[$j] === '{' || $tokens[$j] === ';') {
 							break;
