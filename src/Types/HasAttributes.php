@@ -3,7 +3,6 @@
 
 namespace ElegantMedia\PHPToolkit\Types;
 
-
 trait HasAttributes
 {
 
@@ -34,5 +33,4 @@ trait HasAttributes
 	{
 		unset($this->attributes[$name]);
 	}
-
 }

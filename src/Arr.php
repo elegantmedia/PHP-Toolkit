@@ -142,9 +142,8 @@ class Arr
 	 */
 	public static function swapKeysFn(&$mixed, callable $keyReplaceFunction, $recursive = true): void
 	{
-		if (is_array($mixed))
-		{
-			foreach (array_keys($mixed) as $key):
+		if (is_array($mixed)) {
+			foreach (array_keys($mixed) as $key) :
 				# Working with references here to avoid copying the value,
 				# Since input data can be large
 				$value = &$mixed[$key];
@@ -154,16 +153,16 @@ class Arr
 				$transformedKey = $keyReplaceFunction($key);
 
 				# Work recursively
-				if ($recursive && is_array($value)) array_keys_replace($value, $keyReplaceFunction, $recursive);
+				if ($recursive && is_array($value)) {
+					array_keys_replace($value, $keyReplaceFunction, $recursive);
+				}
 
 				# Store with new key
 				$mixed[$transformedKey] = $value;
 				# Do not forget to unset references!
 				unset($value);
 			endforeach;
-		}
-		else
-		{
+		} else {
 			$newVal = preg_replace('/[A-Z]/', '_$0', $mixed);
 			$newVal = strtolower($newVal);
 			$newVal = ltrim($newVal, '_');

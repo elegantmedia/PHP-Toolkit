@@ -3,7 +3,6 @@
 
 namespace ElegantMedia\PHPToolkit\Types;
 
-
 class DataClass
 {
 
@@ -13,5 +12,4 @@ class DataClass
 	{
 		$this->attributes = $attributes;
 	}
-
 }
