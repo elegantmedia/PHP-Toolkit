@@ -26,18 +26,19 @@ class Text
 	public static function textToArray($text, $delimiters = null): array
 	{
 		if (!$delimiters) {
-			$delimiters = [PHP_EOL, ';', ','];
+			$delimiters = ["\n", ';', ','];
 		}
 
-		$lines = str_replace($delimiters, $delimiters[0], $text);
+		// Normalize all line endings to \n
+		$text = str_replace(["\r\n", "\r"], "\n", $text);
 
-		$trimmedLines = array_map('trim', explode(PHP_EOL, $lines));
+		$lines = str_replace($delimiters, $delimiters[0], $text);
+		$trimmedLines = array_map('trim', explode("\n", $lines));
 
 		// remove empty values
 		$lines = array_filter($trimmedLines, function ($item) {
 			return $item !== '';
 		});
-
 		return $lines;
 	}
 

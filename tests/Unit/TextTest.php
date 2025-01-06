@@ -14,11 +14,16 @@ class TextTest extends TestCase
 	{
 		$strings = [
 			"one\ntwo" => ["one", "two"],
+			"one\r\ntwo" => ["one", "two"],
+			"one\rtwo" => ["one", "two"],
+			"one\r\ntwo\rthree\nfour" => ["one", "two", "three", "four"],
+			" one , two ; three\n four " => ["one", "two", "three", "four"],
 			"one, two,   three
 four
 five" => ["one", "two", "three", "four", "five"],
 			"onetwo" => ["onetwo"],
 			"" => [],
+			" " => [],
 			"," => []
 		];
 
