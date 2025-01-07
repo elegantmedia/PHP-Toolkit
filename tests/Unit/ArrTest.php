@@ -2,6 +2,7 @@
 namespace ElegantMedia\PHPToolkit\Tests\Unit;
 
 use ElegantMedia\PHPToolkit\Arr;
+use PHPUnit\Framework\Attributes\Test;
 
 class ArrTest extends \PHPUnit\Framework\TestCase
 {
@@ -159,9 +160,7 @@ class ArrTest extends \PHPUnit\Framework\TestCase
 		self::assertFalse(Arr::isAssoc('test'));
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function testArrIntersectRecursiveChecksSingleKey()
 	{
 		$arr = [
@@ -184,9 +183,7 @@ class ArrTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($arr, $result);
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function testArrIntersectRecursiveChecksMultipleKeys()
 	{
 		$arr = [
@@ -215,9 +212,7 @@ class ArrTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($arr, $result);
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function testArrIntersectRecursiveChecksNestedKeys()
 	{
 		$arr = [
