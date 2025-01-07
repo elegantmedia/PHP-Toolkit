@@ -82,7 +82,7 @@ class LoaderTest extends TestCase
 
 	private function generateClassFile($dir, $name)
 	{
-		$content = "<?php \r class ${name} \r { \r \r }";
+		$content = "<?php \r class {$name} \r { \r \r }";
 		file_put_contents($dir . "/{$name}.php", $content);
 	}
 }
