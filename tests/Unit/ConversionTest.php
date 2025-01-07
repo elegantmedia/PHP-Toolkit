@@ -2,12 +2,11 @@
 namespace ElegantMedia\PHPToolkit\Tests\Unit;
 
 use ElegantMedia\PHPToolkit\Conversion;
+use PHPUnit\Framework\Attributes\Test;
 
 class ConversionTest extends \PHPUnit\Framework\TestCase
 {
-	/**
-	 *
-	 */
+	#[Test]
 	public function testConversionBytesToHumansConvertsToDecimals()
 	{
 		$bytes = [
@@ -24,9 +23,7 @@ class ConversionTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
-	/**
-	 *
-	 */
+	#[Test]
 	public function testConversionBytesToHumansConvertsToWhole()
 	{
 		$bytes = [
@@ -42,9 +39,7 @@ class ConversionTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function testConversionConvertToIntegerConvertsToWholeNumber()
 	{
 		$strings = [
@@ -60,9 +55,7 @@ class ConversionTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function testConversionConvertToFloatConvertsToFloat()
 	{
 		$strings = [

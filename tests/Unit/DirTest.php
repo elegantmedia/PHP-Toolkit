@@ -4,7 +4,7 @@ namespace ElegantMedia\PHPToolkit\Tests\Unit;
 use ElegantMedia\PHPToolkit\Dir;
 use ElegantMedia\PHPToolkit\Exceptions\FileSystem\DirectoryMissingException;
 use PHPUnit\Framework\TestCase;
-
+use PHPUnit\Framework\Attributes\Test;
 class DirTest extends TestCase
 {
 	private static $testDirName = "_test_dir";
@@ -17,8 +17,8 @@ class DirTest extends TestCase
 		parent::tearDown();
 	}
 
+	#[Test]
 	/**
-	 * @test
 	 * @throws \EMedia\PHPHelpers\Exceptions\FIleSystem\DirectoryNotCreatedException
 	 */
 	public function testDirMakeDirectoryIfNotExistsSkipsExisting()
@@ -31,8 +31,8 @@ class DirTest extends TestCase
 		$this->assertTrue($success);
 	}
 
+	#[Test]
 	/**
-	 * @test
 	 * @throws \EMedia\PHPHelpers\Exceptions\FIleSystem\DirectoryNotCreatedException
 	 */
 	public function testDirMakeDirectoryIfNotExistsCreatesNewDir()
@@ -47,18 +47,14 @@ class DirTest extends TestCase
 		$this->assertTrue(is_dir(static::$testDirName));
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function testDirDeleteDirectoryThrowsIfMissing()
 	{
 		$this->expectException(DirectoryMissingException::class);
 		Dir::deleteDirectory("missing");
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function testDirDeleteDirectoryDeletesFile()
 	{
 		$file = ".dir-manager-test.test.txt";
@@ -74,6 +70,7 @@ class DirTest extends TestCase
 		}
 	}
 
+	#[Test]
 	public function testDirDeleteDirectoryDeletesDirectory()
 	{
 		$dir = ".dir-manager-test";
