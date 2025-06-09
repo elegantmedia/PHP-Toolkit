@@ -10,5 +10,4 @@ LOCAL.md
 .claude
 coverage
 .php-cs-fixer.cache
-.php-cs-fixer.cache
 .php_cs.cache

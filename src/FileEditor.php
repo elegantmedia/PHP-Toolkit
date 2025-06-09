@@ -293,12 +293,27 @@ class FileEditor
 			for ($iMax = count($tokens); $i < $iMax; $i++) {
 				if ($tokens[$i][0] === T_NAMESPACE) {
 					for ($j = $i + 1, $jMax = count($tokens); $j < $jMax; $j++) {
-						// 'T_NAME_QUALIFIED' is available since PHP 8
-						$tokenName = defined('T_NAME_QUALIFIED') ? 'T_NAME_QUALIFIED' : 'T_STRING';
-						if ($tokens[$j][0] === constant($tokenName)) {
-							$namespace .= '\\' . $tokens[$j][1];
-						} elseif ($tokens[$j] === '{' || $tokens[$j] === ';') {
-							break;
+						if (is_array($tokens[$j])) {
+							// PHP 8.0+ has T_NAME_QUALIFIED for fully qualified names
+							if (defined('T_NAME_QUALIFIED') && $tokens[$j][0] === T_NAME_QUALIFIED) {
+								$namespace = $tokens[$j][1];
+								break;
+							} elseif ($tokens[$j][0] === T_STRING) {
+								// PHP 7.4: collect T_STRING tokens
+								if ($namespace && substr($namespace, -1) !== '\\') {
+									$namespace .= '\\';
+								}
+								$namespace .= $tokens[$j][1];
+							}
+							// Skip T_NS_SEPARATOR and T_WHITESPACE tokens
+						} else {
+							// Non-array token
+							if ($tokens[$j] === '\\') {
+								// Namespace separator in PHP 7.4
+								continue;
+							} elseif ($tokens[$j] === '{' || $tokens[$j] === ';') {
+								break;
+							}
 						}
 					}
 				}
@@ -315,13 +330,20 @@ class FileEditor
 
 		$response = [];
 
-		if ($withNamespace) {
+		if ($withNamespace && $namespace) {
 			$response[] = $namespace;
 		}
 
-		$response[] = $class;
+		if ($class) {
+			$response[] = $class;
+		}
 
 		$response = implode('\\', $response);
+
+		// Add leading backslash if namespace is present
+		if ($withNamespace && $namespace && !$stripLeading) {
+			$response = '\\' . $response;
+		}
 
 		if ($stripLeading) {
 			$response = ltrim($response, '\\');
