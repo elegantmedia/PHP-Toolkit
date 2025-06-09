@@ -1,4 +1,4 @@
- Check ## PHP Toolkit - Utility and Helper Library for Business Applications
+# PHP Toolkit - Utility and Helper Library for Business Applications
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
