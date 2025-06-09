@@ -1,15 +1,11 @@
 <?php
 
-
 use ElegantMedia\PHPToolkit\Check;
 
 if (!function_exists('validate_all_present')) {
-
 	/**
-	 *
 	 * Check all values are !empty
-	 * Throws an exception if at least one value is empty
-	 *
+	 * Throws an exception if at least one value is empty.
 	 */
 	function validate_all_present()
 	{

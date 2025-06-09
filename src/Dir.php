@@ -1,22 +1,21 @@
 <?php
 
-
 namespace ElegantMedia\PHPToolkit;
 
 use ElegantMedia\PHPToolkit\Exceptions\FileSystem\DirectoryMissingException;
-use ElegantMedia\PHPToolkit\Exceptions\FIleSystem\DirectoryNotCreatedException;
+use ElegantMedia\PHPToolkit\Exceptions\FileSystem\DirectoryNotCreatedException;
 
 class Dir
 {
-
 	/**
-	 * Create a directory if it doesn't exist
+	 * Create a directory if it doesn't exist.
 	 *
 	 * @param      $dirPath
-	 * @param int $permissions
+	 * @param int  $permissions
 	 * @param bool $recursive
 	 *
 	 * @return bool
+	 *
 	 * @throws DirectoryNotCreatedException
 	 */
 	public static function makeDirectoryIfNotExists($dirPath, $permissions = 0775, $recursive = true): bool
@@ -37,11 +36,12 @@ class Dir
 	}
 
 	/**
-	 *
-	 * Delete a directory
+	 * Delete a directory.
 	 *
 	 * @param $dirPath
+	 *
 	 * @return bool
+	 *
 	 * @throws DirectoryMissingException
 	 */
 	public static function deleteDirectory($dirPath): bool
@@ -75,17 +75,17 @@ class Dir
 	}
 
 	/**
-	 *
-	 * Delete files in a directory by wildcard
+	 * Delete files in a directory by wildcard.
 	 *
 	 * @param $dir
 	 * @param $wildcard
+	 *
 	 * @return int
 	 */
 	public static function cleanDirectoryByWildcard($dir, $wildcard): int
 	{
 		// get the files
-		$files = glob($dir.DIRECTORY_SEPARATOR.$wildcard);
+		$files = glob($dir . DIRECTORY_SEPARATOR . $wildcard);
 
 		$count = 0;
 		foreach ($files as $file) {
@@ -99,11 +99,11 @@ class Dir
 	}
 
 	/**
-	 *
-	 * Delete files in a directory by it's file extensions
+	 * Delete files in a directory by it's file extensions.
 	 *
 	 * @param $dir
 	 * @param $extension
+	 *
 	 * @return false|int
 	 */
 	public static function cleanDirectoryByExtension($dir, $extension)

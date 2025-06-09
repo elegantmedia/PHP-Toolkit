@@ -1,18 +1,17 @@
 <?php
 
-
 namespace ElegantMedia\PHPToolkit;
 
 class Reflector
 {
-
 	/**
-	 *
-	 * Get the inherited class' directory path
+	 * Get the inherited class' directory path.
 	 *
 	 * @param object|string $self
-	 * @param null $pathSuffix
+	 * @param null          $pathSuffix
+	 *
 	 * @return string
+	 *
 	 * @throws \ReflectionException
 	 */
 	public static function classPath($self, $pathSuffix = null): string
@@ -28,7 +27,7 @@ class Reflector
 		$path = dirname($reflector->getFileName());
 
 		if ($pathSuffix) {
-			$path .= DIRECTORY_SEPARATOR.ltrim($pathSuffix, DIRECTORY_SEPARATOR);
+			$path .= DIRECTORY_SEPARATOR . ltrim($pathSuffix, DIRECTORY_SEPARATOR);
 		}
 
 		return Path::canonical($path);

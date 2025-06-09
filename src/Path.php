@@ -1,14 +1,11 @@
 <?php
 
-
 namespace ElegantMedia\PHPToolkit;
 
 class Path
 {
-
 	/**
-	 *
-	 * Add a trailing slash to the end of a string (if it doesn't exist)
+	 * Add a trailing slash to the end of a string (if it doesn't exist).
 	 *
 	 * @param $path
 	 *
@@ -20,7 +17,6 @@ class Path
 	}
 
 	/**
-	 *
 	 * Remove the trailing slash from a string (if exists).
 	 *
 	 * @param $path
@@ -33,7 +29,6 @@ class Path
 	}
 
 	/**
-	 *
 	 * Remove the leading slash of a string (if exists).
 	 *
 	 * @param $path
@@ -43,7 +38,7 @@ class Path
 	public static function withoutStartingSlash($path): string
 	{
 		$firstChar = $path[0];
-		$hasLeadingSlash = $firstChar === "/";
+		$hasLeadingSlash = $firstChar === '/';
 		if (!$hasLeadingSlash) {
 			return $path;
 		}
@@ -52,8 +47,7 @@ class Path
 	}
 
 	/**
-	 *
-	 * Add a leading slash to a string (if it doesn't exist)
+	 * Add a leading slash to a string (if it doesn't exist).
 	 *
 	 * @param $path
 	 *
@@ -65,13 +59,13 @@ class Path
 	}
 
 	/**
-	 *
 	 * Remove dot segments from paths.
 	 *
-	 * @link https://tools.ietf.org/html/rfc3986#section-5.2.4
-	 * @link https://stackoverflow.com/a/21486848/1234452
+	 * @see https://tools.ietf.org/html/rfc3986#section-5.2.4
+	 * @see https://stackoverflow.com/a/21486848/1234452
 	 *
 	 * @param $path
+	 *
 	 * @return string
 	 */
 	public static function canonical($path): string

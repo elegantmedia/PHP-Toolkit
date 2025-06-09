@@ -1,14 +1,11 @@
 <?php
 
-
 namespace ElegantMedia\PHPToolkit;
 
 class Loader
 {
-
 	/**
-	 *
-	 * Include all PHP files from a directory
+	 * Include all PHP files from a directory.
 	 *
 	 * @param $dirPath
 	 */
@@ -16,7 +13,7 @@ class Loader
 	{
 		$includedFiles = get_included_files();
 
-		foreach (glob($dirPath . "/*.php") as $filename) {
+		foreach (glob($dirPath . '/*.php') as $filename) {
 			if (!in_array($filename, $includedFiles, true)) {
 				include_once $filename;
 			}
@@ -24,8 +21,7 @@ class Loader
 	}
 
 	/**
-	 *
-	 * Include all PHP files from a directory, recursively
+	 * Include all PHP files from a directory, recursively.
 	 *
 	 * @param $dirPath
 	 */
@@ -34,7 +30,6 @@ class Loader
 		// include files from current dir
 		self::includeAllFilesFromDir($dirPath);
 
-		/** @var \SplFileInfo $filename */
 		$filtered = [];
 		foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dirPath)) as $file) {
 			if (!in_array($file->getPathname(), get_included_files(), true)) {

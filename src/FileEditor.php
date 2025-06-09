@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ElegantMedia\PHPToolkit;
 
 use ElegantMedia\PHPToolkit\Exceptions\FileSystem\FileNotFoundException;
@@ -8,19 +7,17 @@ use ElegantMedia\PHPToolkit\Exceptions\FileSystem\SectionAlreadyExistsException;
 
 class FileEditor
 {
-
-
 	/**
-	 *
-	 * Check if a section exists, and if not, append contents
+	 * Check if a section exists, and if not, append contents.
 	 *
 	 * @param      $filePath
 	 * @param      $stubPath
 	 * @param      $sectionStartString
 	 * @param null $sectionEndString
-	 * @param bool $throwEx				Returns the number of bytes written or FALSE on failure
+	 * @param bool $throwEx            Returns the number of bytes written or FALSE on failure
 	 *
 	 * @return bool|int
+	 *
 	 * @throws SectionAlreadyExistsException
 	 * @throws FileNotFoundException
 	 */
@@ -44,7 +41,7 @@ class FileEditor
 		}
 
 		if (empty($sectionStartString)) {
-			throw new \InvalidArgumentException("A section start string is required.");
+			throw new \InvalidArgumentException('A section start string is required.');
 		}
 
 		// check if the routes file mentions anything about the $sectionStartString
@@ -59,15 +56,15 @@ class FileEditor
 	}
 
 	/**
+	 * Append a stub to an existing file.
 	 *
-	 * Append a stub to an existing file
-	 *
-	 * @param $filePath
-	 * @param $stubPath
-	 *
+	 * @param      $filePath
+	 * @param      $stubPath
 	 * @param bool $verifyPathsExists
 	 * @param bool $stripOpenTag
+	 *
 	 * @return bool|int
+	 *
 	 * @throws FileNotFoundException
 	 */
 	public static function appendStub($filePath, $stubPath, $verifyPathsExists = true, $stripOpenTag = true)
@@ -96,16 +93,15 @@ class FileEditor
 		return file_put_contents($filePath, $contents, FILE_APPEND);
 	}
 
-
 	/**
-	 *
-	 * Check if a string exists in a file. (Don't use to check on large files)
+	 * Check if a string exists in a file. (Don't use to check on large files).
 	 *
 	 * @param      $filePath
 	 * @param      $string
 	 * @param bool $caseSensitive
 	 *
 	 * @return bool
+	 *
 	 * @throws FileNotFoundException
 	 */
 	public static function isTextInFile($filePath, $string, $caseSensitive = true): bool
@@ -114,28 +110,28 @@ class FileEditor
 			throw new FileNotFoundException("File $filePath not found");
 		}
 
-		$command = ($caseSensitive)? 'strpos': 'stripos';
+		$command = ($caseSensitive) ? 'strpos' : 'stripos';
 
 		return $command(file_get_contents($filePath), $string) !== false;
 	}
 
-
 	/**
+	 * Find and replace text in a file.
 	 *
-	 * Find and replace text in a file
+	 * @param                 $filePath
+	 * @param string|string[] $search   <p>
+	 *                                  The value being searched for, otherwise known as the needle.
+	 *                                  An array may be used to designate multiple needles.
+	 *                                  </p>
+	 * @param string|string[] $replace  <p>
+	 *                                  The replacement value that replaces found search
+	 *                                  values. An array may be used to designate multiple replacements.
+	 *                                  </p>
+	 * @param null|int        $count    [optional] If passed, this will hold the number of matched and replaced needles
 	 *
-	 * @param $filePath
-	 * @param string|string[] $search <p>
-	 * The value being searched for, otherwise known as the needle.
-	 * An array may be used to designate multiple needles.
-	 * </p>
-	 * @param string|string[] $replace <p>
-	 * The replacement value that replaces found search
-	 * values. An array may be used to designate multiple replacements.
-	 * </p>
-	 * @param null|int $count [optional] If passed, this will hold the number of matched and replaced needles.
-	 * @return int|false The function returns the number of bytes that were written to the file, or
-	 * false on failure.
+	 * @return int|false the function returns the number of bytes that were written to the file, or
+	 *                   false on failure
+	 *
 	 * @throws FileNotFoundException
 	 */
 	public static function findAndReplace($filePath, $search, $replace, &$count = null)
@@ -150,27 +146,27 @@ class FileEditor
 	}
 
 	/**
+	 * Find and replace text in a file.
 	 *
-	 * Find and replace text in a file
+	 * @param                 $filePath
+	 * @param string|string[] $search   <p>
+	 *                                  The value being searched for, otherwise known as the needle.
+	 *                                  An array may be used to designate multiple needles.
+	 *                                  </p>
+	 * @param string|string[] $replace  <p>
+	 *                                  The replacement value that replaces found search
+	 *                                  values. An array may be used to designate multiple replacements.
+	 *                                  </p>
+	 * @param int             $limit    [optional] <p>
+	 *                                  The maximum possible replacements for each pattern in each
+	 *                                  <i>subject</i> string. Defaults to
+	 *                                  -1 (no limit).
+	 *                                  </p>
+	 * @param int             $count    [optional] <p>
+	 *                                  If specified, this variable will be filled with the number of
+	 *                                  replacements done.
+	 *                                  </p>
 	 *
-	 * @param $filePath
-	 * @param string|string[] $search <p>
-	 * The value being searched for, otherwise known as the needle.
-	 * An array may be used to designate multiple needles.
-	 * </p>
-	 * @param string|string[] $replace <p>
-	 * The replacement value that replaces found search
-	 * values. An array may be used to designate multiple replacements.
-	 * </p>
-	 * @param int $limit [optional] <p>
-	 * The maximum possible replacements for each pattern in each
-	 * <i>subject</i> string. Defaults to
-	 * -1 (no limit).
-	 * </p>
-	 * @param int $count [optional] <p>
-	 * If specified, this variable will be filled with the number of
-	 * replacements done.
-	 * </p>
 	 * @return string|string[]|null <b>preg_replace</b> returns an array if the
 	 * <i>subject</i> parameter is an array, or a string
 	 * otherwise.
@@ -179,6 +175,7 @@ class FileEditor
 	 * If matches are found, the new <i>subject</i> will
 	 * be returned, otherwise <i>subject</i> will be
 	 * returned unchanged or <b>NULL</b> if an error occurred.
+	 *
 	 * @throws FileNotFoundException
 	 */
 	public static function findAndReplaceRegex($filePath, $search, $replace, $limit = -1, &$count = null)
@@ -195,13 +192,13 @@ class FileEditor
 	}
 
 	/**
-	 *
-	 * Check if two files are identical in content
+	 * Check if two files are identical in content.
 	 *
 	 * @param $path1
 	 * @param $path2
 	 *
 	 * @return bool
+	 *
 	 * @throws FileNotFoundException
 	 */
 	public static function areFilesSimilar($path1, $path2): bool
@@ -210,17 +207,16 @@ class FileEditor
 			throw new FileNotFoundException("At least one of the requested files not found. {$path1}, {$path2}");
 		}
 
-		return ((filesize($path1) == filesize($path2)) && (md5_file($path1) == md5_file($path2)));
+		return (filesize($path1) == filesize($path2)) && (md5_file($path1) == md5_file($path2));
 	}
 
 	/**
-	 *
 	 * Returns the first line from an existing file.
 	 *
-	 * @param $filePath
-	 *
+	 * @param      $filePath
 	 * @param bool $trim
 	 * @param bool $skipOpenTag
+	 *
 	 * @return bool|string
 	 */
 	public static function readFirstLine($filePath, $trim = true, $skipOpenTag = true)
@@ -260,16 +256,17 @@ class FileEditor
 		return $startingLine;
 	}
 
-
 	/**
-	 *
 	 * Get a Classname from a file. Only reads the file without parsing for syntax.
-	 * @link https://stackoverflow.com/questions/7153000/get-class-name-from-file
 	 *
-	 * @param $filePath
+	 * @see https://stackoverflow.com/questions/7153000/get-class-name-from-file
+	 *
+	 * @param      $filePath
 	 * @param bool $withNamespace
 	 * @param bool $stripLeading
+	 *
 	 * @return string
+	 *
 	 * @throws FileNotFoundException
 	 */
 	public static function getPHPClassName($filePath, $withNamespace = true, $stripLeading = false): string
@@ -293,13 +290,13 @@ class FileEditor
 				continue;
 			}
 
-			for ($iMax = count($tokens); $i< $iMax; $i++) {
+			for ($iMax = count($tokens); $i < $iMax; $i++) {
 				if ($tokens[$i][0] === T_NAMESPACE) {
-					for ($j=$i+1, $jMax = count($tokens); $j< $jMax; $j++) {
+					for ($j = $i + 1, $jMax = count($tokens); $j < $jMax; $j++) {
 						// 'T_NAME_QUALIFIED' is available since PHP 8
 						$tokenName = defined('T_NAME_QUALIFIED') ? 'T_NAME_QUALIFIED' : 'T_STRING';
 						if ($tokens[$j][0] === constant($tokenName)) {
-							$namespace .= '\\'.$tokens[$j][1];
+							$namespace .= '\\' . $tokens[$j][1];
 						} elseif ($tokens[$j] === '{' || $tokens[$j] === ';') {
 							break;
 						}
@@ -307,9 +304,9 @@ class FileEditor
 				}
 
 				if ($tokens[$i][0] === T_CLASS) {
-					for ($j=$i+1, $jMax = count($tokens); $j< $jMax; $j++) {
+					for ($j = $i + 1, $jMax = count($tokens); $j < $jMax; $j++) {
 						if ($tokens[$j] === '{') {
-							$class = $tokens[$i+2][1];
+							$class = $tokens[$i + 2][1];
 						}
 					}
 				}

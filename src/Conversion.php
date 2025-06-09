@@ -4,12 +4,10 @@ namespace ElegantMedia\PHPToolkit;
 
 class Conversion
 {
-
 	/**
-	 *
 	 * Convert bytes to a human readable format.
 	 *
-	 * @link http://codeaid.net/php/convert-size-in-bytes-to-a-human-readable-format-(php)
+	 * @see http://codeaid.net/php/convert-size-in-bytes-to-a-human-readable-format-(php)
 	 *
 	 * @param int $bytes
 	 * @param int $precision
@@ -38,23 +36,21 @@ class Conversion
 		}
 	}
 
-
 	/**
-	 * Converts a string with numbers to a full number
+	 * Converts a string with numbers to a full number.
 	 *
 	 * @param $string
-	 * @return int
 	 *
+	 * @return int
 	 */
 	public static function stringToInt($string): int
 	{
-		return (int) round(floatval(preg_replace("/[^0-9.]/", "", $string)));
+		return (int) round(floatval(preg_replace('/[^0-9.]/', '', $string)));
 	}
 
 	/**
-	 *
 	 * Convert a string numeric to a float
-	 * Eg: 1,232.12 -> becomes -> (float) 1232.12
+	 * Eg: 1,232.12 -> becomes -> (float) 1232.12.
 	 *
 	 * @param $value
 	 *
