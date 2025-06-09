@@ -188,9 +188,70 @@ validate_all_present();
 ```
 
 
+## Development Setup
+
+### Running Tests Locally
+
+Run the test suite:
+```bash
+composer test
+```
+
+### Code Quality Tools
+
+This project uses GitHub Actions for CI/CD instead of external services. You can run the same checks locally:
+
+#### Code Style Fixing
+
+Fix code style issues automatically:
+```bash
+# Install PHP CS Fixer globally (first time only)
+composer global require friendsofphp/php-cs-fixer
+
+# Run the fixer
+php-cs-fixer fix --config=.php-cs-fixer.php
+```
+
+Check for style issues without fixing:
+```bash
+php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php
+```
+
+#### Static Analysis
+
+Run PHPStan for static analysis:
+```bash
+# Install PHPStan (included in composer dev dependencies)
+composer install
+
+# Run analysis
+vendor/bin/phpstan analyse
+```
+
+#### Code Coverage
+
+Generate code coverage report:
+```bash
+# Run tests with coverage (requires Xdebug)
+vendor/bin/phpunit --coverage-html coverage/
+
+# View the report
+open coverage/index.html
+```
+
+### GitHub Actions CI
+
+The project includes GitHub Actions workflows that automatically:
+- Run tests on multiple PHP versions (7.3, 7.4, 8.0, 8.1, 8.2)
+- Check and fix code style issues
+- Perform static analysis with PHPStan
+- Generate and upload code coverage reports to Codecov
+
+These checks run on every push and pull request to the `master` or `main` branches.
+
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## License
 
