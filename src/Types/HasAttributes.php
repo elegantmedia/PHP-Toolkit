@@ -1,18 +1,14 @@
 <?php
 
-
 namespace ElegantMedia\PHPToolkit\Types;
 
 trait HasAttributes
 {
-
 	protected $attributes = [];
 
-	public function __set($name, $value)
+	public function __set($name, $value): void
 	{
 		$this->attributes[$name] = $value;
-
-		return $this;
 	}
 
 	public function __get($name)
@@ -24,7 +20,7 @@ trait HasAttributes
 		return $this->attributes[$name];
 	}
 
-	public function __isset($name)
+	public function __isset($name): bool
 	{
 		return isset($this->attributes[$name]);
 	}

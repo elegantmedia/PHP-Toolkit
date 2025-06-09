@@ -13,7 +13,10 @@ class TimingTest extends TestCase
 	 */
 	public function testTimingMicroTimestampUnqiue(): void
 	{
-		$this->assertNotEquals(Timing::microTimestamp(), Timing::microTimestamp());
+		$timestamp1 = Timing::microTimestamp();
+		usleep(1); // Sleep for 1 microsecond to ensure different timestamps
+		$timestamp2 = Timing::microTimestamp();
+		$this->assertNotEquals($timestamp1, $timestamp2);
 	}
 
 	/**

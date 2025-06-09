@@ -7,3 +7,7 @@ phpunit.xml
 roadmap
 .phpunit.result.cache
 LOCAL.md
+.claude
+coverage
+.php-cs-fixer.cache
+.php_cs.cache

@@ -4,10 +4,7 @@ namespace ElegantMedia\PHPToolkit;
 
 class Arr
 {
-
-
 	/**
-	 *
 	 * Is the array an associative array?
 	 *
 	 * @param $input
@@ -19,13 +16,12 @@ class Arr
 		if (!is_array($input)) {
 			return false;
 		}
+
 		return array_keys($input) !== range(0, count($input) - 1);
 	}
 
-
 	/**
-	 *
-	 * Find matching structure on a nested array recursively
+	 * Find matching structure on a nested array recursively.
 	 *
 	 * @param       $subset
 	 * @param       $array
@@ -69,7 +65,6 @@ class Arr
 		return $results;
 	}
 
-
 	public static function removeChildArrays($array): array
 	{
 		$response = [];
@@ -80,12 +75,12 @@ class Arr
 				$response[$key] = $value;
 			}
 		}
+
 		return $response;
 	}
 
 	/**
-	 *
-	 * Implode but don't include empty values
+	 * Implode but don't include empty values.
 	 *
 	 * @param $glue
 	 * @param $pieces
@@ -101,13 +96,13 @@ class Arr
 	}
 
 	/**
-	 *
 	 * Replace an existing key of an array with a new one, recursively if required.
 	 *
 	 * @param array $array
-	 * @param $existingKey
-	 * @param $newKey
-	 * @param false $recursive
+	 * @param       $existingKey
+	 * @param       $newKey
+	 * @param bool  $recursive
+	 *
 	 * @return array
 	 */
 	public static function swapKey(array $array, $existingKey, $newKey, $recursive = false): array
@@ -122,22 +117,23 @@ class Arr
 
 			// do this recursively
 			if ($recursive) {
-				if (isset($arrayData[$newKey]) && count($arrayData[$newKey])) {
+				if (isset($arrayData[$newKey]) && is_array($arrayData[$newKey]) && count($arrayData[$newKey])) {
 					$arrayData[$newKey] = self::swapKey($arrayData[$newKey], $existingKey, $newKey, true);
 				}
 			}
 
 			$allArrayData[] = $arrayData;
 		}
+
 		return $allArrayData;
 	}
 
 	/**
 	 * Replace keys of a given array based on a given function
-	 * Based on http://stackoverflow.com/questions/1444484/how-to-convert-all-keys-in-a-multi-dimenional-array-to-snake-case
+	 * Based on http://stackoverflow.com/questions/1444484/how-to-convert-all-keys-in-a-multi-dimenional-array-to-snake-case.
 	 *
-	 * @param mixed $mixed
-	 * @param callable $keyReplaceFunction
+	 * @param mixed     $mixed
+	 * @param callable  $keyReplaceFunction
 	 * @param bool|true $recursive
 	 */
 	public static function swapKeysFn(&$mixed, callable $keyReplaceFunction, $recursive = true): void
@@ -154,7 +150,7 @@ class Arr
 
 				# Work recursively
 				if ($recursive && is_array($value)) {
-					array_keys_replace($value, $keyReplaceFunction, $recursive);
+					self::swapKeysFn($value, $keyReplaceFunction, $recursive);
 				}
 
 				# Store with new key
@@ -171,10 +167,9 @@ class Arr
 		}
 	}
 
-
 	/**
+	 * Get an array and key it by a given key.
 	 *
-	 * Get an array and key it by a given key
 	 * @example
 	 * [
 	 *        [ 'name' => 'john', 'age' => 45 ],
@@ -187,7 +182,6 @@ class Arr
 	 *        'john' => [ 'age' => 45 ],
 	 *        'jane' => [ 'age' => 32 ],
 	 * ]
-	 *
 	 *
 	 * @param $array
 	 * @param $keyBy

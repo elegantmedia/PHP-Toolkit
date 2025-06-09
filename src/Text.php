@@ -1,17 +1,15 @@
 <?php
 
-
 namespace ElegantMedia\PHPToolkit;
 
 class Text
 {
-
 	/**
+	 * Get a block of text and split it into lines.
 	 *
-	 * Get a block of text and split it into lines
-	 *
-	 * @param $text
+	 * @param      $text
 	 * @param null $delimiters
+	 *
 	 * @return array
 	 *
 	 * @example
@@ -21,7 +19,6 @@ class Text
 	 *
 	 * Returns
 	 * ['one', 'two', 'three', 'four', 'five']
-	 *
 	 */
 	public static function textToArray($text, $delimiters = null): array
 	{
@@ -39,13 +36,15 @@ class Text
 		$lines = array_filter($trimmedLines, function ($item) {
 			return $item !== '';
 		});
+
 		return $lines;
 	}
 
 	/**
-	 * Convert an 'existing_snake_case' to 'existing snake case'
+	 * Convert an 'existing_snake_case' to 'existing snake case'.
 	 *
 	 * @param $string
+	 *
 	 * @return string
 	 */
 	public static function reverseSnake($string)
@@ -56,8 +55,10 @@ class Text
 	}
 
 	/**
-	 * Generate a random string without any ambiguous characters
+	 * Generate a random string without any ambiguous characters.
+	 *
 	 * @param int $length
+	 *
 	 * @return string
 	 */
 	public static function randomUnambiguous($length = 16): string
