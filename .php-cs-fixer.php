@@ -90,5 +90,5 @@ return (new PhpCsFixer\Config())
         'whitespace_after_comma_in_array' => true,
     ])
     ->setLineEnding("\n")
-    ->setIndent('    ')
+    ->setIndent("\t")
     ->setFinder($finder);
