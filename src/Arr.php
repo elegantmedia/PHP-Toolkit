@@ -154,7 +154,7 @@ class Arr
 
 				# Work recursively
 				if ($recursive && is_array($value)) {
-					array_keys_replace($value, $keyReplaceFunction, $recursive);
+					self::swapKeysFn($value, $keyReplaceFunction, $recursive);
 				}
 
 				# Store with new key

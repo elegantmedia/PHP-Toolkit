@@ -1,4 +1,4 @@
-## PHP Toolkit - Utility and Helper Library for Business Applications
+ Check ## PHP Toolkit - Utility and Helper Library for Business Applications
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -196,7 +196,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and for details.
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-Copyright (c) 2020 Elegant Media.
+Copyright (c) 2025 Elegant Media.
 
 [ico-version]: https://img.shields.io/packagist/v/elegantmedia/php-toolkit.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
